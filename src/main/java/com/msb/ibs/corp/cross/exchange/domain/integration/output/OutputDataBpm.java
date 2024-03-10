@@ -1,0 +1,13 @@
+package com.msb.ibs.corp.cross.exchange.domain.integration.output;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OutputDataBpm {
+    private String requestCode;
+    private String statusGuarantee;
+}

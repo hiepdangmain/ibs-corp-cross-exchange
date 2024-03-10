@@ -1,0 +1,8 @@
+package com.msb.ibs.corp.cross.exchange.application.request;
+
+import lombok.Data;
+
+@Data
+public class GuaranteeDeleteRequest {
+    String tranSn;
+}

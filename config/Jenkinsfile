@@ -1,0 +1,84 @@
+pipeline {
+    agent any
+    tools {
+        oc 'oc'
+        maven 'maven'
+    }
+    options {
+        disableConcurrentBuilds()
+    }
+    environment {
+        appname = 'corp-cross-exchange'
+        SONAR_PROJECT = "ibs-${appname}-service"
+        sit_env = 'cds'
+        //uat_env = 'cds'
+        imagetags = 'latest'
+        buildFile = 'config/Dockerfile'
+        buildDockerfile = " -f ${buildFile}"
+    }
+    stages {
+        stage('Define Environment') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'master') {
+                        env.deploy_env = "${sit_env}"
+                    }
+                    // else if (env.BRANCH_NAME == 'uat') {
+                    //     env.deploy_env = "${uat_env}"
+                    // }
+
+                    imagesName = '10.1.66.33:8083/' + deploy_env + "/corp/sit/${appname}"
+                    pushdeployOCP = "default-route-openshift-image-registry.apps.ocp-nonprod.msb.com.vn/${deploy_env}/${appname}"
+
+                    echo 'Image Name = ' +  imagesName
+                    echo 'Deploy Environnment = ' + env.deploy_env
+                    echo 'OCP Deploy Env = ' + pushdeployOCP
+                }
+            }
+        }
+
+        stage('Build App') {
+            steps {
+                script {
+                    sh 'mvn -s config/setting.xml -Dmaven.repo.local=/tmp/m21 clean install'
+                }
+            }
+        }
+
+        stage('Sonar Scan') {
+            steps {
+                script {
+                    withSonarQubeEnv(installationName: 'sonarqube') {
+                        sh 'mvn sonar:sonar -s config/setting.xml -D sonar.language=java -Dsonar.projectKey="${SONAR_PROJECT}"'
+                    }
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                script {
+                    sh 'docker build -t ' + imagesName + ':' + env.imagetags + env.buildDockerfile + ' .'
+                }
+            }
+        }
+
+        stage('Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: '44565509-1cd9-4199-86a1-34581260a62b', url: 'http://10.1.66.33:8083') {
+                        //sh 'docker push ' + imagesName + ':' + env.imagetags
+                    }
+                    if (env.BRANCH_NAME == 'master') {
+                        //cds credential
+                        withDockerRegistry(credentialsId: '54c8f927-c296-4f02-a8ec-e2d35862dbab',
+                         url: 'http://default-route-openshift-image-registry.apps.ocp-nonprod.msb.com.vn'){
+                            sh 'docker tag ' + imagesName + ':' + env.imagetags + ' ' + pushdeployOCP + ':' + env.imagetags
+                            sh 'docker push ' + pushdeployOCP + ':' + env.imagetags
+                             }
+                    }
+                }
+            }
+        }
+    }
+}

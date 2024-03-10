@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="corpCreditReport" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="20" uuid="f1099a26-72bf-4861-8e07-2358c8e4e799">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="6"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Table Dataset 1" uuid="61eb523f-5fec-4bf1-92ca-739a87f94a77">
+		<parameter name="data" class="java.util.List"/>
+		<field name="numberOriginal" class="java.lang.Integer"/>
+		<field name="numberCoppy" class="java.lang.Integer"/>
+		<field name="value" class="java.lang.String"/>
+		<group name="currency_code">
+			<groupExpression><![CDATA[$F{value}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="Dataset47" uuid="9ef9c5da-d270-48d6-a2ee-ec4d0a850ef8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<parameter name="data47A" class="java.util.List"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="value" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Dataset71B" uuid="7c8d5945-2584-497d-a028-519a6479ad0d">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="value" class="java.lang.String"/>
+		<field name="pairSourceFee" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="formGuarantee" class="java.lang.String"/>
+	<parameter name="swiftCodeBank" class="java.lang.String"/>
+	<parameter name="infoSwiftCodeBank" class="java.lang.String"/>
+	<parameter name="type42C" class="java.lang.Boolean"/>
+	<parameter name="swiftCode" class="java.lang.String"/>
+	<parameter name="swiftCodeName" class="java.lang.String"/>
+	<parameter name="typeGuarantee" class="java.lang.String"/>
+	<parameter name="otherGuarantee" class="java.lang.String"/>
+	<parameter name="beneficiary" class="java.lang.String"/>
+	<parameter name="beneficiaryAddress" class="java.lang.String"/>
+	<parameter name="amount" class="java.lang.String"/>
+	<parameter name="currency" class="java.lang.String"/>
+	<parameter name="guaranteeStart" class="java.lang.String"/>
+	<parameter name="startDate" class="java.lang.String"/>
+	<parameter name="startEventDate" class="java.lang.String"/>
+	<parameter name="guaranteeEnd" class="java.lang.String"/>
+	<parameter name="expiredDate" class="java.lang.String"/>
+	<parameter name="endEventDate" class="java.lang.String"/>
+	<parameter name="expectEndDate" class="java.lang.String"/>
+	<parameter name="formatTextGuarantee" class="java.lang.String"/>
+	<parameter name="commitGuarantee" class="java.lang.String"/>
+	<parameter name="contractNo" class="java.lang.String"/>
+	<parameter name="accountPayment" class="java.lang.String"/>
+	<parameter name="commit1" class="java.lang.String"/>
+	<parameter name="commit2" class="java.lang.String"/>
+	<parameter name="commit2Date" class="java.lang.String"/>
+	<parameter name="commit3" class="java.lang.String"/>
+	<parameter name="commitOther" class="java.lang.String"/>
+	<parameter name="commitOtherContent" class="java.lang.String"/>
+	<parameter name="nickChecker" class="java.lang.String"/>
+	<parameter name="userNameChecker" class="java.lang.String"/>
+	<parameter name="certCode" class="java.lang.String"/>
+	<parameter name="contentCommit" class="java.lang.String"/>
+	<parameter name="applicant" class="java.lang.String"/>
+	<parameter name="certCodeDate" class="java.lang.String"/>
+	<parameter name="certCodePlace" class="java.lang.String"/>
+	<parameter name="amountEN" class="java.lang.String"/>
+	<parameter name="amountVN" class="java.lang.String"/>
+	<parameter name="checkGuaranteeEnd" class="java.lang.Boolean"/>
+	<parameter name="fileAttachContent" class="java.lang.String"/>
+	<parameter name="checkFormGuarantee" class="java.lang.Boolean"/>
+	<parameter name="dateSign" class="java.lang.String"/>
+	<parameter name="certCodeChecker" class="java.lang.String"/>
+	<parameter name="dateCreate" class="java.lang.String"/>
+	<parameter name="contentAll" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 1 from dual]]>
+	</queryString>
+	<variable name="todayString" class="java.lang.String">
+		<variableExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></variableExpression>
+		<initialValueExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></initialValueExpression>
+	</variable>
+	<variable name="endateIsToday" class="java.lang.Boolean">
+		<variableExpression><![CDATA[$V{todayString}.equals($P{formGuarantee})]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{todayString}.equals($P{formGuarantee})]]></initialValueExpression>
+	</variable>
+	<background>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="-20" y="0" width="560" height="120" uuid="39f02648-5b3f-433c-a9e5-bca4f7b4492d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<staticText>
+					<reportElement x="45" y="47" width="469" height="39" uuid="b53872ec-fe02-4b4f-89a1-1204867bc842"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true" isItalic="false" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[ĐỀ NGHỊ PHÁT HÀNH BẢO LÃNH
+APPLICATION FOR BANK GUARANTEE ISSUE
+]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="45" y="88" width="469" height="15" uuid="4e5d3570-06ed-4660-a8d7-9fe2ac1ff83d"/>
+					<textElement textAlignment="Center">
+						<font fontName="DejaVu Sans" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Kính gửi: NGÂN HÀNG TMCP HÀNG HẢI VIỆT NAM/MSB"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="10" width="358" height="20" uuid="fe36f794-0a73-4abb-aba4-04fb146b5a93"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{dateCreate}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<summary>
+		<band height="100">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="-20" y="0" width="560" height="100" uuid="5550cda4-fdd5-476f-8915-560dc0b9cfb1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="540" height="100" isPrintWhenDetailOverflows="true" uuid="084920bb-ecf7-4ef4-9c6f-d168db2a3f68"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{contentAll}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>
